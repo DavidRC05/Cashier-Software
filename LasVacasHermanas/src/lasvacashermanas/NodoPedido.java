@@ -9,5 +9,37 @@ package lasvacashermanas;
  * @author Arturo
  */
 public class NodoPedido {
-    
+    private Pedido elemento;
+    private NodoPedido siguiente;
+    public NodoPedido(){
+        this.siguiente=null;
+    }
+
+    /**
+     * @return the elemento
+     */
+    public Pedido getElemento() {
+        return elemento;
+    }
+
+    /**
+     * @param elemento the elemento to set
+     */
+    public void setElemento(Pedido elemento) {
+        this.elemento = elemento;
+    }
+
+    /**
+     * @return the siguiente
+     */
+    public NodoPedido getSiguiente() {
+        return siguiente;
+    }
+
+    /**
+     * @param siguiente the siguiente to set
+     */
+    public void setSiguiente(NodoPedido siguiente) {
+        this.siguiente = siguiente;
+    }
 }

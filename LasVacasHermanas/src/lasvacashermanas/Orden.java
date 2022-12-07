@@ -9,39 +9,53 @@ package lasvacashermanas;
  * @author Arturo
  */
 public class Orden {
-    private int numPedido;
-    private ListaSimple ordenes;
+    private String producto;
+    private int precio, cantidad;
      public Orden() {
-       this.numPedido = 0;
-       this.ordenes = null;
+      this.cantidad = 0;
+      this.precio = 0;
+      this.producto = "";
     }
 
     /**
-     * @return the numPedido
+     * @return the producto
      */
-    public int getNumPedido() {
-        return numPedido;
+    public String getProducto() {
+        return producto;
     }
 
     /**
-     * @param numPedido the numPedido to set
+     * @param producto the producto to set
      */
-    public void setNumPedido(int numPedido) {
-        this.numPedido = numPedido;
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
     /**
-     * @return the ordenes
+     * @return the precio
      */
-    public ListaSimple getOrdenes() {
-        return ordenes;
+    public int getPrecio() {
+        return precio;
     }
 
     /**
-     * @param ordenes the ordenes to set
+     * @param precio the precio to set
      */
-    public void setOrdenes(ListaSimple ordenes) {
-        this.ordenes = ordenes;
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
+    /**
+     * @return the cantidad
+     */
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    /**
+     * @param cantidad the cantidad to set
+     */
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 }
