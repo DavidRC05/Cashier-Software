@@ -10,9 +10,10 @@ package lasvacashermanas;
  */
 public class Pedido {
     private ListaSimple ordenes;
-    private int numPedido;
+    private int numPedidoAuto;
+    private String StringPedido;
      public Pedido(){
-       this.numPedido = 0;
+       this.numPedidoAuto = 0;
        this.ordenes = null;
     }
 
@@ -33,14 +34,31 @@ public class Pedido {
     /**
      * @return the numPedido
      */
-    public int getNumPedido() {
-        return numPedido;
+    public int getnumPedidoAuto() {
+        return numPedidoAuto;
     }
 
     /**
      * @param numPedido the numPedido to set
      */
-    public void setNumPedido(int numPedido) {
-        this.numPedido = numPedido;
+    public void setnumPedidoAuto(int numPedido) {
+        this.numPedidoAuto = numPedido;
+    }
+    public void agregarStrPedido(String x){
+        this.setStringPedido(this.getStringPedido() + x);
+    }
+
+    /**
+     * @return the StringPedido
+     */
+    public String getStringPedido() {
+        return StringPedido;
+    }
+
+    /**
+     * @param StringPedido the StringPedido to set
+     */
+    public void setStringPedido(String StringPedido) {
+        this.StringPedido = StringPedido;
     }
 }

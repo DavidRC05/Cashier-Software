@@ -9,12 +9,15 @@ package lasvacashermanas;
  * @author Arturo
  */
 public class Orden {
+    private String ordenStr;
     private String producto;
-    private int precio, cantidad;
+    private int precio, cantidad, total;
      public Orden() {
       this.cantidad = 0;
       this.precio = 0;
       this.producto = "";
+      this.ordenStr = "";
+      this.total = 0;
     }
 
     /**
@@ -57,5 +60,36 @@ public class Orden {
      */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    /**
+     * @return the ordenStr
+     */
+    public String getOrdenStr() {
+        return ordenStr;
+    }
+    public void HacerOrdenStr(){
+        String x = this.producto+" / "+this.total+"₡ / "+this.cantidad+"\n";
+        this.setOrdenStr(x);
+    }
+    /**
+     * @param ordenStr the ordenStr to set
+     */
+    public void setOrdenStr(String ordenStr) {
+        this.ordenStr = ordenStr;
+    }
+
+    /**
+     * @return the total
+     */
+    public int getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

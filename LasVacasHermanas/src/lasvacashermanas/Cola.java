@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class Cola {
-
+    private int contador = 1;
     private NodoPedido inicio;
     private NodoPedido fin;
 
@@ -23,22 +23,17 @@ public class Cola {
     }
 
     public boolean vacia() {
-        if (inicio == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return inicio == null;
     }
 
-    public void encolar() {
+    public void encolar(ListaSimple Registro) {
         Pedido p = new Pedido();
-
-        //hacer aqui todo lo de los productos
-        //debe hacerse esta parte recursiva
-        p.setNumPedido(0);
-        HacerPedido(p, true);
-
+        ListaSimple l = new ListaSimple();
         NodoPedido nuevo = new NodoPedido();
+        p.setOrdenes(l);
+        p.setnumPedidoAuto(this.contador);
+        HacerPedido(p, true);
+        p.agregarStrPedido(p.getOrdenes().toString());
         nuevo.setElemento(p);
 
         if (vacia()) {
@@ -48,32 +43,29 @@ public class Cola {
             fin.setSiguiente(nuevo);
             fin = nuevo;
         }
+        this.contador+=1;
     }
 
     //agregar lo de que se meta en los registros
     public void desencolar() {
         if (!vacia()) {
+            JOptionPane.showMessageDialog(null, "El pedido #"+inicio.getElemento().getnumPedidoAuto()+" se ha completado");
             inicio = inicio.getSiguiente();
-            JOptionPane.showMessageDialog(null, "El elemento fue extraído",
-                    "Desencolar", JOptionPane.INFORMATION_MESSAGE,
-                    new ImageIcon("src/img/pag.png"));
         } else {
-            JOptionPane.showMessageDialog(null, "El elemento no se puede extraer",
-                    "Cola Vacía", JOptionPane.INFORMATION_MESSAGE,
-                    new ImageIcon("src/img/open.png"));
+            JOptionPane.showMessageDialog(null, "No hay pedidos en la cola");
         }
     }
 
-    /*
     @Override
     public String toString() {
+        int cont = 1;
         String s = "";
         if (!vacia()) {
             NodoPedido aux = inicio;
             while (aux != null) {
-                s += aux.getElemento().getNombre() + " / "
-                        + aux.getElemento().getCalificacion() + "<-";
+                s += cont+".\n"+aux.getElemento().getOrdenes().toString();
                 aux = aux.getSiguiente();
+                cont+=1;
             }
             JOptionPane.showMessageDialog(null, "La Cola contiene: \n" + s,
                     "Contenido Cola", JOptionPane.INFORMATION_MESSAGE,
@@ -85,28 +77,28 @@ public class Cola {
         }
         return s;
     }
-     */
     public void HacerPedido(Pedido p, boolean Seguir) {
-        p.getOrdenes().agregar();
-        try {
-            int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Desea ordenar algo mas?\n"
-                    + "1. Si\n"
-                    + "2. No"));
-            switch (op) {
-                case 1:
-                    Seguir = true;
-                    break;
-                case 2:
-                    Seguir = false;
-                    break;
-
-                default:
-                    JOptionPane.showMessageDialog(null, "Error! Opción inválida");
-                    HacerPedido(p, Seguir);
+        if (Seguir) {
+            p.getOrdenes().agregar(); //
+            try {
+                int op = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Desea ordenar algo mas?\n"
+                        + "1. Si\n"
+                        + "2. No"));
+                switch (op) {
+                    case 1:
+                        Seguir = true;
+                        break;
+                    case 2:
+                        Seguir = false;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Error! Opción inválida");
+                        HacerPedido(p, Seguir);
+                }
+            } catch (HeadlessException | NumberFormatException e) {
+                System.out.println("Error...\n" + e.getMessage());
             }
-        } catch (HeadlessException | NumberFormatException e) {
-            System.out.println("Error...\n" + e.getMessage());
+            HacerPedido(p, Seguir);
         }
-         HacerPedido(p, Seguir);
     }
 }

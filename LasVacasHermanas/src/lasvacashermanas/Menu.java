@@ -12,7 +12,12 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class Menu {
-
+    ListaCircular ListaMesas = new ListaCircular();
+    ListaSimple RegistroAutoServicio = new ListaSimple();
+    ListaSimple RegistroServicioMesa = new ListaSimple();
+    ListaSimple RegistroGeneral = new ListaSimple();
+    Cola ColaAutoServicio = new Cola();
+    
     //Arbol a = new Arbol();
     public void mostrar() {
         try {
@@ -56,6 +61,7 @@ public class Menu {
             switch (op) {
                 case 1:
                     //
+                    
                     MostrarServicioDeMesa();
                     break;
                 case 2:
@@ -88,20 +94,23 @@ public void MostrarAutoservicio(){
                     + "1. Agregar pedido\n"
                     + "2. Entregar pedido\n"
                     + "3. Ver cola\n"
-                    + "4. Consultar pedido\n"
+                    + "4. Consultar pedido(dejar de ultimo)\n"
                     + "5. volver\n"                
                     + "Digite su opción: \n", "Autoservicio", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
                     //
+                    ColaAutoServicio.encolar(this.RegistroAutoServicio);
                     MostrarAutoservicio();
                     break;
                 case 2:
                     //
+                    ColaAutoServicio.desencolar();
                      MostrarAutoservicio();
                     break;
                 case 3:
                     //
+                    ColaAutoServicio.toString();
                      MostrarAutoservicio();
                     break;
                 case 4:

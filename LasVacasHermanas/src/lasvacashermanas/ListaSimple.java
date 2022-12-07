@@ -28,9 +28,12 @@ public class ListaSimple {
 
     public void agregar() {
         Orden o = new Orden();
-        TomarOrden(o);
-        o.setCantidad(Integer.parseInt(JOptionPane.showInputDialog(null, "Indique cuantos quiere del producto "+o.getProducto())));
         NodoOrden nuevo = new NodoOrden();
+        TomarOrden(o);
+        
+        o.setCantidad(Integer.parseInt(JOptionPane.showInputDialog(null, "Indique cuantos quiere del producto: "+o.getProducto())));
+        o.setTotal(o.getCantidad()*o.getPrecio());
+        o.HacerOrdenStr();
         nuevo.setDato(o);
         if (vacia()) {
             inicio = nuevo;
@@ -52,24 +55,23 @@ public class ListaSimple {
 
     public void extraer() {
         if (!vacia()) {
+            JOptionPane.showMessageDialog(null, "El pedido numero ");
             inicio = inicio.getSiguiente();
-            JOptionPane.showMessageDialog(null, "Elemento extraído");
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo extraer, lista vacía");
         }
     }
 
+  
     @Override
     public String toString() {
         String datos = "";
         if (!vacia()) {
             NodoOrden aux = inicio;
             while (aux != null) {
-                datos += aux.getDato().getCantidad()+ " - " + aux.getDato().getCantidad() + " -> ";
+                datos += aux.getDato().getOrdenStr();
                 aux = aux.getSiguiente();
             }
-            JOptionPane.showMessageDialog(null, "La lista contiene: " + datos,
-                    "Contenido de la Lista", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo mostar",
                     "Lista Vacía", JOptionPane.ERROR_MESSAGE);
@@ -88,10 +90,10 @@ public void TomarOrden(Orden o){
                     Bebidas(o);
                     break;
                 case 2:
-                    //MostrarAutoservicio();
+                    Hamburguesas(o);
                     break;
                 case 3:
-                    //MostrarRegistro();
+                    Postres(o);
                     break;
                 case 4:
                     System.exit(0);
@@ -102,9 +104,7 @@ public void TomarOrden(Orden o){
             System.out.println("Error...\n" + e.getMessage());
             TomarOrden(o);
         }
-         o.setProducto("");
-         o.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el modelo del vehículo")));
-         o.setPrecio(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el modelo del vehículo")));
+    
 
      }
 public void Bebidas(Orden o){
@@ -132,7 +132,7 @@ public void Bebidas(Orden o){
                     break;
                 case 4:
                     o.setProducto("Cerveza");
-                    o.setPrecio(700);
+                    o.setPrecio(700);                   
                     break;
                 case 5:
                     TomarOrden(o);
