@@ -12,14 +12,21 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class Menu {
+
     ListaCircular ListaMesas = new ListaCircular();
     ListaSimple RegistroAutoServicio = new ListaSimple();
     ListaSimple RegistroServicioMesa = new ListaSimple();
     ListaSimple RegistroGeneral = new ListaSimple();
     Cola ColaAutoServicio = new Cola();
-    
+    boolean ListaCircularCreado = false;
+
     //Arbol a = new Arbol();
     public void mostrar() {
+        if (!ListaCircularCreado) {
+            for (int i = 0; i < 10; i++) {
+                ListaMesas.insertar();
+            }
+        }
         try {
             int op = Integer.parseInt(JOptionPane.showInputDialog(null, "      ¡Bienvenido a Las Vacas Hermanas!      \n"
                     + "1. Servicio de mesa\n"
@@ -50,18 +57,18 @@ public class Menu {
     }
 
     public void MostrarServicioDeMesa() {
-            try {
+        try {
             int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Servicio de mesa:\n"
                     + "1. Atender mesa\n"
                     + "2. Pagar mesa\n"
                     + "3. Ver mesas\n"
                     + "4. Consultar mesa\n"
-                    + "5. volver\n"                
+                    + "5. volver\n"
                     + "Digite su opción: \n", "Servicio de mesa", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
                     //
-                    
+
                     MostrarServicioDeMesa();
                     break;
                 case 2:
@@ -78,7 +85,7 @@ public class Menu {
                     break;
                 case 5:
                     mostrar();
-                    break;    
+                    break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error! Opción inválida");
                     MostrarServicioDeMesa();
@@ -87,15 +94,16 @@ public class Menu {
             System.out.println("Error...\n" + e.getMessage());
             MostrarServicioDeMesa();
         }
-}
-public void MostrarAutoservicio(){
-    try {
+    }
+
+    public void MostrarAutoservicio() {
+        try {
             int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Autoservicio:\n"
                     + "1. Agregar pedido\n"
                     + "2. Entregar pedido\n"
                     + "3. Ver cola\n"
                     + "4. Consultar pedido(dejar de ultimo)\n"
-                    + "5. volver\n"                
+                    + "5. volver\n"
                     + "Digite su opción: \n", "Autoservicio", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
@@ -106,37 +114,38 @@ public void MostrarAutoservicio(){
                 case 2:
                     //
                     ColaAutoServicio.desencolar();
-                     MostrarAutoservicio();
+                    MostrarAutoservicio();
                     break;
                 case 3:
                     //
                     ColaAutoServicio.toString();
-                     MostrarAutoservicio();
+                    MostrarAutoservicio();
                     break;
                 case 4:
                     //
-                     MostrarAutoservicio();
+                    MostrarAutoservicio();
                     break;
                 case 5:
                     mostrar();
-                    break;    
+                    break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error! Opción inválida");
-                     MostrarAutoservicio();
+                    MostrarAutoservicio();
             }
         } catch (HeadlessException | NumberFormatException e) {
             System.out.println("Error...\n" + e.getMessage());
             MostrarServicioDeMesa();
         }
-        
+
     }
-    public void MostrarRegistro(){
+
+    public void MostrarRegistro() {
         try {
             int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Registro:\n"
                     + "1. Registro general\n"
                     + "2. Registro autoservicio\n"
                     + "3. Registro servicio de mesa\n"
-                    + "4. Volver\n"                
+                    + "4. Volver\n"
                     + "Digite su opción: \n", "Registro", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
@@ -145,7 +154,7 @@ public void MostrarAutoservicio(){
                     break;
                 case 2:
                     //
-                     MostrarRegistro();
+                    MostrarRegistro();
                     break;
                 case 3:
                     //
@@ -153,15 +162,14 @@ public void MostrarAutoservicio(){
                     break;
                 case 4:
                     mostrar();
-                    break;  
+                    break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error! Opción inválida");
-                     MostrarRegistro();
+                    MostrarRegistro();
             }
         } catch (HeadlessException | NumberFormatException e) {
             System.out.println("Error...\n" + e.getMessage());
-             MostrarRegistro();
+            MostrarRegistro();
         }
-        
     }
 }
