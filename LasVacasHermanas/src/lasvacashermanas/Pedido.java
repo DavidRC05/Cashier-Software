@@ -9,6 +9,7 @@ package lasvacashermanas;
  * @author Arturo
  */
 public class Pedido {
+    //papapa
     private ListaSimple ordenes;
     private int numPedidoAuto;
     private String StringPedido;
