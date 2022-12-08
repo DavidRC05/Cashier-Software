@@ -11,6 +11,7 @@ package lasvacashermanas;
 public class NodoPedido {
     private Pedido elemento;
     private NodoPedido siguiente;
+    private NodoPedido regi;
     public NodoPedido(){
         this.siguiente=null;
     }
@@ -41,5 +42,13 @@ public class NodoPedido {
      */
     public void setSiguiente(NodoPedido siguiente) {
         this.siguiente = siguiente;
+    }
+
+    public NodoPedido getRegi() {
+        return regi;
+    }
+
+    public void setRegi(NodoPedido regi) {
+        this.regi = regi;
     }
 }

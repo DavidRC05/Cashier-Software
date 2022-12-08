@@ -153,7 +153,7 @@ public class Menu {
                     MostrarRegistro();
                     break;
                 case 2:
-                    //
+                    ColaAutoServicio.Registro();
                     MostrarRegistro();
                     break;
                 case 3:
