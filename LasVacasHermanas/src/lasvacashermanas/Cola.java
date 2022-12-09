@@ -5,6 +5,7 @@
 package lasvacashermanas;
 
 import java.awt.HeadlessException;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -113,6 +114,7 @@ public class Cola {
     }
 
     public void Registro() {
+        ArrayList<NodoPedido> regis = new ArrayList();
         int cont = 1;
         String s = "";
         NodoPedido aux = regi;
@@ -120,6 +122,7 @@ public class Cola {
             s += cont + ".\n" + aux.getElemento().getOrdenes().toString();
             aux = aux.getSiguiente();
             cont += 1;
+            regis.add(aux);
         }
         JOptionPane.showMessageDialog(null, "La Cola contiene: \n" + s,
                 "Contenido Cola", JOptionPane.INFORMATION_MESSAGE,

@@ -5,6 +5,8 @@
 package lasvacashermanas;
 
 import java.awt.HeadlessException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,21 +21,29 @@ public class Menu {
     ListaSimple RegistroGeneral = new ListaSimple();
     Cola ColaAutoServicio = new Cola();
     boolean ListaCircularCreado = false;
+    
 
     //Arbol a = new Arbol();
+    public void inicio(){
+         Icon icono = new ImageIcon(getClass().getResource("/lasvacashermanas/WhatsApp Image 2022-12-06 at 9.44.13 PM.jpeg"));
+         JOptionPane.showMessageDialog(null, "", "Bienvenido", JOptionPane.PLAIN_MESSAGE, icono);
+         mostrar();
+    }
     public void mostrar() {
+       Icon icono = new ImageIcon(getClass().getResource("/lasvacashermanas/WhatsApp Image 2022-12-06 at 9.44.13 PM.jpeg"));
         if (!ListaCircularCreado) {
             for (int i = 0; i < 10; i++) {
                 ListaMesas.insertar();
             }
         }
         try {
+           
             int op = Integer.parseInt(JOptionPane.showInputDialog(null, "      ¡Bienvenido a Las Vacas Hermanas!      \n"
                     + "1. Servicio de mesa\n"
                     + "2. Autoservicio\n"
                     + "3. Registro\n"
                     + "4. Salir\n"
-                    + "Digite su opción: \n", "Menu Principal", JOptionPane.PLAIN_MESSAGE));
+                    + "Digite su opción: \n", "Menu Principal",JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
                     MostrarServicioDeMesa();
