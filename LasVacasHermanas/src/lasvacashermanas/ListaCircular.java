@@ -4,6 +4,7 @@
  */
 package lasvacashermanas;
 
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,9 +12,12 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class ListaCircular {
-     private NodoMesa inicio;
+
+    private int clientes = 0;
+    private NodoMesa inicio;
     private NodoMesa fin;
     private int TotalMesa = 1;
+    private int contador = 1;
 
     public ListaCircular() {
         this.inicio = null;
@@ -75,22 +79,111 @@ public class ListaCircular {
         }
     }
 
-    public void mostrarElementos() {
-        /**
-        String s = "";
-        Nodo aux = inicio;
-        s += aux.getElemento().getNombCurso() + "//"
-                + aux.getElemento().getCantCreditos() + "//"
-                + aux.getElemento().getPrecio() + "<=>";
+    public void PagarMesa() {
+        int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Cual mesa desea pagar?+\n" + mostrarElementosStr()));
+        Mesa m = agarrar(op);
+        Pedido p = new Pedido();
+        m.setPedidoMesa(p);
+        m.setVacia(true);
+        this.clientes -= 1;
+    }
+
+    public void AtenderMesa() {
+        int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Cual mesa desea atender?+\n" + mostrarElementosStr()));
+        Mesa m = agarrar(op);
+        if (m.isVacia()) {
+            Pedido p = new Pedido();
+            m.setPedidoMesa(p);
+            ListaSimple l = new ListaSimple();
+            p.setOrdenes(l);
+            p.setnumPedidoAuto(this.contador);
+            HacerPedido(p, true);
+            p.setStringPedido("");//talvez se pueda quitar esto
+            p.agregarStrPedido(p.getOrdenes().toString());
+            this.contador += 1;
+            m.setVacia(false);
+            this.clientes += 1;
+        } else {
+            Pedido p = m.getPedidoMesa();
+            HacerPedido(p, true);
+            p.setStringPedido("");//talvez se pueda quitar esto
+            p.agregarStrPedido(p.getOrdenes().toString());
+        }
+    }
+
+    public String mostrarElementosStr() {
+        String s = "", strPedido;
+        NodoMesa aux = inicio;
+        int numMesa;
+        numMesa = aux.getElemento().getNumMesa();
+        strPedido = aux.getElemento().getPedidoMesa().getStringPedido();
+        if (strPedido != null) {
+            s += numMesa + ".\n" + strPedido + "\n";
+        } else {
+            s += numMesa + ".\n...\n";
+        }
         aux = aux.getSiguiente();
         while (aux != inicio) {
-            s += aux.getElemento().getNombCurso() + "//"
-                    + aux.getElemento().getCantCreditos() + "//"
-                    + aux.getElemento().getPrecio() + "<=>";
+            numMesa = aux.getElemento().getNumMesa();
+            strPedido = aux.getElemento().getPedidoMesa().getStringPedido();
+            if (strPedido != null) {
+                s += numMesa + ".\n" + strPedido + "\n";
+            } else {
+                s += numMesa + ".\nVacia...\n";
+            }
             aux = aux.getSiguiente();
         }
-        JOptionPane.showMessageDialog(null, "La lista contiene: \n" + s);
-        * **/
+        return ("Lista de mesas: \n" + s);
     }
-    
+
+    public Mesa agarrar(int num) {
+        boolean seguir = true;
+        NodoMesa aux = inicio;
+        if (num == aux.getElemento().getNumMesa()) {
+            seguir = false;
+            return aux.getElemento();
+        }
+        aux = aux.getSiguiente();
+        while (aux != inicio || seguir) {
+            if (num == aux.getElemento().getNumMesa()) {
+                seguir = false;
+                return aux.getElemento();
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
+    }
+
+    public void mostrarElementos() {
+        if (this.clientes >= 1) {
+            JOptionPane.showMessageDialog(null, mostrarElementosStr());
+        } else {
+            JOptionPane.showMessageDialog(null, "Aun no hay clientes...");
+        }
+    }
+
+    public void HacerPedido(Pedido p, boolean Seguir) {
+        if (Seguir) {
+            p.getOrdenes().agregar(); //
+            try {
+                int op = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Desea ordenar algo mas?\n"
+                        + "1. Si\n"
+                        + "2. No"));
+                switch (op) {
+                    case 1:
+                        Seguir = true;
+                        break;
+                    case 2:
+                        Seguir = false;
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "Error! Opción inválida");
+                        HacerPedido(p, Seguir);
+                }
+            } catch (HeadlessException | NumberFormatException e) {
+                System.out.println("Error...\n" + e.getMessage());
+            }
+            HacerPedido(p, Seguir);
+        }
+    }
 }
