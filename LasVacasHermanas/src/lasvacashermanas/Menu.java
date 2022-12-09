@@ -36,6 +36,7 @@ public class Menu {
                 ListaMesas.insertar();
             }
         }
+        ListaCircularCreado = true;
         try {
            
             int op = Integer.parseInt(JOptionPane.showInputDialog(null, "      ¡Bienvenido a Las Vacas Hermanas!      \n"
@@ -72,28 +73,22 @@ public class Menu {
                     + "1. Atender mesa\n"
                     + "2. Pagar mesa\n"
                     + "3. Ver mesas\n"
-                    + "4. Consultar mesa\n"
-                    + "5. volver\n"
+                    + "4. volver\n"
                     + "Digite su opción: \n", "Servicio de mesa", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
-                    //
-
+                    ListaMesas.AtenderMesa();
                     MostrarServicioDeMesa();
                     break;
                 case 2:
-                    //
+                    ListaMesas.PagarMesa();
                     MostrarServicioDeMesa();
                     break;
                 case 3:
-                    //
+                    ListaMesas.mostrarElementos();
                     MostrarServicioDeMesa();
                     break;
-                case 4:
-                    //
-                    MostrarServicioDeMesa();
-                    break;
-                case 5:
+                case 4:              
                     mostrar();
                     break;
                 default:
@@ -112,31 +107,23 @@ public class Menu {
                     + "1. Agregar pedido\n"
                     + "2. Entregar pedido\n"
                     + "3. Ver cola\n"
-                    + "4. Consultar pedido(dejar de ultimo)\n"
-                    + "5. volver\n"
+                    + "4. volver\n"
                     + "Digite su opción: \n", "Autoservicio", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
-                    //
                     ColaAutoServicio.encolar(this.RegistroAutoServicio);
                     MostrarAutoservicio();
                     break;
                 case 2:
-                    //
                     ColaAutoServicio.desencolar();
                     MostrarAutoservicio();
                     break;
                 case 3:
-                    //
                     ColaAutoServicio.toString();
                     MostrarAutoservicio();
                     break;
                 case 4:
-                    //
-                    MostrarAutoservicio();
-                    break;
-                case 5:
-                    mostrar();
+                     mostrar();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error! Opción inválida");
@@ -159,7 +146,6 @@ public class Menu {
                     + "Digite su opción: \n", "Registro", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
-                    //
                     MostrarRegistro();
                     break;
                 case 2:
@@ -167,7 +153,6 @@ public class Menu {
                     MostrarRegistro();
                     break;
                 case 3:
-                    //
                     MostrarRegistro();
                     break;
                 case 4:
