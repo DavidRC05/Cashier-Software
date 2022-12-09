@@ -16,6 +16,8 @@ public class ListaCircular {
     private int clientes = 0;
     private NodoMesa inicio;
     private NodoMesa fin;
+    private NodoMesa regi;
+    Cola colamesa = new Cola();
     private int TotalMesa = 1;
     private int contador = 1;
 
@@ -44,6 +46,7 @@ public class ListaCircular {
         this.TotalMesa += 1;
         if (vacia()) {
             inicio = nuevo;
+            regi = nuevo;
             fin = nuevo;
             fin.setSiguiente(inicio);
             inicio.setAnterior(fin);
@@ -79,9 +82,11 @@ public class ListaCircular {
         }
     }
 
-    public void PagarMesa() {
+    public void PagarMesa(Cola General) {
         int op = Integer.parseInt(JOptionPane.showInputDialog(null, "Cual mesa desea pagar?+\n" + mostrarElementosStr()));
         Mesa m = agarrar(op);
+        colamesa.encolarMesa(m.getPedidoMesa());
+        General.encolarMesa(m.getPedidoMesa());
         Pedido p = new Pedido();
         m.setPedidoMesa(p);
         m.setVacia(true);
@@ -186,4 +191,10 @@ public class ListaCircular {
             HacerPedido(p, Seguir);
         }
     }
+
+    public void mostrarRegistro() {
+        JOptionPane.showMessageDialog(null, colamesa.toString());
+        
+    }
+    
 }

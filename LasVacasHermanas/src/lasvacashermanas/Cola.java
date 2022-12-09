@@ -30,7 +30,7 @@ public class Cola {
         return inicio == null;
     }
 
-    public void encolar(ListaSimple Registro) {
+    public void encolar(Cola General) {
         Pedido p = new Pedido();
         ListaSimple l = new ListaSimple();
         NodoPedido nuevo = new NodoPedido();
@@ -41,6 +41,7 @@ public class Cola {
         p.agregarStrPedido(p.getOrdenes().toString());
         reg.setElemento(p);
         nuevo.setElemento(p);
+        General.encolarMesa(p);
 
         if (vacia()) {
             inicio = nuevo;
@@ -128,6 +129,27 @@ public class Cola {
                 "Contenido Cola", JOptionPane.INFORMATION_MESSAGE,
                 new ImageIcon("src/img/open.png"));
     }
+    public void encolarMesa(Pedido p) {
+        NodoPedido nuevo = new NodoPedido();
+        NodoPedido reg = new NodoPedido();
+        reg.setElemento(p);
+        nuevo.setElemento(p);
+
+        if (vacia()) {
+            inicio = nuevo;
+            regi = reg;
+            fin = nuevo;
+            fregi = reg;
+        } else {
+            fin.setSiguiente(nuevo);
+            fin = nuevo;
+            fregi.setSiguiente(reg);
+            fregi = reg;
+        }
+        this.contador += 1;
+    }
+    
+    
 }
 
 

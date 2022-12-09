@@ -14,10 +14,9 @@ public class Autoservice extends javax.swing.JFrame {
      * Creates new form Autoservice
      */
     ListaCircular ListaMesas = new ListaCircular();
-    ListaSimple RegistroAutoServicio = new ListaSimple();
-    ListaSimple RegistroServicioMesa = new ListaSimple();
-    ListaSimple RegistroGeneral = new ListaSimple();
     Cola ColaAutoServicio = new Cola();
+    Cola Registrogeneral = new Cola();
+    boolean ListaCircularCreado = false;
     public Autoservice() {
         initComponents();
     }
@@ -123,7 +122,7 @@ public class Autoservice extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ColaAutoServicio.encolar(this.RegistroAutoServicio);
+        ColaAutoServicio.encolar(Registrogeneral);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

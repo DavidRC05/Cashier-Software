@@ -16,10 +16,8 @@ import javax.swing.JOptionPane;
 public class Menu {
 
     ListaCircular ListaMesas = new ListaCircular();
-    ListaSimple RegistroAutoServicio = new ListaSimple();
-    ListaSimple RegistroServicioMesa = new ListaSimple();
-    ListaSimple RegistroGeneral = new ListaSimple();
     Cola ColaAutoServicio = new Cola();
+    Cola Registrogeneral = new Cola();
     boolean ListaCircularCreado = false;
     
 
@@ -81,7 +79,7 @@ public class Menu {
                     MostrarServicioDeMesa();
                     break;
                 case 2:
-                    ListaMesas.PagarMesa();
+                    ListaMesas.PagarMesa(Registrogeneral);
                     MostrarServicioDeMesa();
                     break;
                 case 3:
@@ -111,7 +109,7 @@ public class Menu {
                     + "Digite su opción: \n", "Autoservicio", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
-                    ColaAutoServicio.encolar(this.RegistroAutoServicio);
+                    ColaAutoServicio.encolar(Registrogeneral);
                     MostrarAutoservicio();
                     break;
                 case 2:
@@ -146,13 +144,14 @@ public class Menu {
                     + "Digite su opción: \n", "Registro", JOptionPane.PLAIN_MESSAGE));
             switch (op) {
                 case 1:
-                    MostrarRegistro();
+                    Registrogeneral.toString();
                     break;
                 case 2:
                     ColaAutoServicio.Registro();
                     MostrarRegistro();
                     break;
                 case 3:
+                    ListaMesas.mostrarRegistro();
                     MostrarRegistro();
                     break;
                 case 4:
