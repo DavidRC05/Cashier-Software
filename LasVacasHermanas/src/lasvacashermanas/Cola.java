@@ -13,9 +13,12 @@ import javax.swing.JOptionPane;
  * @author Arturo
  */
 public class Cola {
+
     private int contador = 1;
     private NodoPedido inicio;
     private NodoPedido fin;
+    private NodoPedido regi;
+    private NodoPedido fregi;
 
     public Cola() {
         this.inicio = null;
@@ -30,26 +33,32 @@ public class Cola {
         Pedido p = new Pedido();
         ListaSimple l = new ListaSimple();
         NodoPedido nuevo = new NodoPedido();
+        NodoPedido reg = new NodoPedido();
         p.setOrdenes(l);
         p.setnumPedidoAuto(this.contador);
         HacerPedido(p, true);
         p.agregarStrPedido(p.getOrdenes().toString());
+        reg.setElemento(p);
         nuevo.setElemento(p);
 
         if (vacia()) {
             inicio = nuevo;
+            regi = reg;
             fin = nuevo;
+            fregi = reg;
         } else {
             fin.setSiguiente(nuevo);
             fin = nuevo;
+            fregi.setSiguiente(reg);
+            fregi = reg;
         }
-        this.contador+=1;
+        this.contador += 1;
     }
 
     //agregar lo de que se meta en los registros
     public void desencolar() {
         if (!vacia()) {
-            JOptionPane.showMessageDialog(null, "El pedido #"+inicio.getElemento().getnumPedidoAuto()+" se ha completado");
+            JOptionPane.showMessageDialog(null, "El pedido #" + inicio.getElemento().getnumPedidoAuto() + " se ha completado");
             inicio = inicio.getSiguiente();
         } else {
             JOptionPane.showMessageDialog(null, "No hay pedidos en la cola");
@@ -63,9 +72,9 @@ public class Cola {
         if (!vacia()) {
             NodoPedido aux = inicio;
             while (aux != null) {
-                s += cont+".\n"+aux.getElemento().getOrdenes().toString();
+                s += cont + ".\n" + aux.getElemento().getOrdenes().toString();
                 aux = aux.getSiguiente();
-                cont+=1;
+                cont += 1;
             }
             JOptionPane.showMessageDialog(null, "La Cola contiene: \n" + s,
                     "Contenido Cola", JOptionPane.INFORMATION_MESSAGE,
@@ -77,6 +86,7 @@ public class Cola {
         }
         return s;
     }
+
     public void HacerPedido(Pedido p, boolean Seguir) {
         if (Seguir) {
             p.getOrdenes().agregar(); //
@@ -101,4 +111,20 @@ public class Cola {
             HacerPedido(p, Seguir);
         }
     }
+
+    public void Registro() {
+        int cont = 1;
+        String s = "";
+        NodoPedido aux = regi;
+        while (aux != null) {
+            s += cont + ".\n" + aux.getElemento().getOrdenes().toString();
+            aux = aux.getSiguiente();
+            cont += 1;
+        }
+        JOptionPane.showMessageDialog(null, "La Cola contiene: \n" + s,
+                "Contenido Cola", JOptionPane.INFORMATION_MESSAGE,
+                new ImageIcon("src/img/open.png"));
+    }
 }
+
+
