@@ -5,6 +5,8 @@
 package lasvacashermanas;
 
 import java.awt.HeadlessException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,7 @@ public class ListaCircular {
     Cola colamesa = new Cola();
     private int TotalMesa = 1;
     private int contador = 1;
+    Icon icono = new ImageIcon(getClass().getResource("/lasvacashermanas/WhatsApp Image 2022-12-06 at 9.44.13 PM.jpeg"));
 
     public ListaCircular() {
         this.inicio = null;
@@ -161,7 +164,7 @@ public class ListaCircular {
 
     public void mostrarElementos() {
         if (this.clientes >= 1) {
-            JOptionPane.showMessageDialog(null, mostrarElementosStr());
+            JOptionPane.showMessageDialog(null, mostrarElementosStr(), "Mesas", JOptionPane.INFORMATION_MESSAGE, icono);
         } else {
             JOptionPane.showMessageDialog(null, "Aun no hay clientes...");
         }
